@@ -12,8 +12,10 @@ class Bird:
         self.grav = 0.3
         self.r = 20
         self.score = 0
+        self.score_ = 0
         self.windowheight = windowh
         self.alive = True
+        self.fitness = 0
     
     def update(self):
         self.vel += self.grav

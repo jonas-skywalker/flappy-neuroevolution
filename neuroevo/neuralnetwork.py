@@ -18,11 +18,16 @@ To do:
 import my_matrix_lib as matrix
 import math
 import json
+import random
 
 
 # Activation Function
 def sigmoid(x):
     return 1/(1 + math.e**(-x))
+
+
+def mutation(x):
+    return x + random.gauss(0, 0.1)
 
 
 class NeuralNetwork:
@@ -138,6 +143,19 @@ class NeuralNetwork:
         data = {"weights": weights_data, "biases": biases_data, "structure": self.structure, "lr": self.lr}
         with open(name, "w") as outfile:
             json.dump(data, outfile, indent=4)
+            
+    # adding functionality for neuroevolution
+    # def crossover(nn1, nn2)
+    def mutate(self, prob):
+        if random.uniform(0, 1) < prob:
+            for weight in self.weights:
+                for i in range(weight.rows):
+                    for j in range(weight.cols):
+                        weight.matrix_data[i][j] += random.gauss(0, 0.1)
+            for bias in self.biases:
+                for i in range(bias.rows):
+                    for j in range(bias.cols):
+                        bias.matrix_data[i][j] += random.gauss(0, 0.1)
 
 
 def load_json(name):
